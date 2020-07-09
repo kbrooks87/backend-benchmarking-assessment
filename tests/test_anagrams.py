@@ -20,7 +20,6 @@ class TestAnagrams(unittest.TestCase):
             self.ana = importlib.import_module(module_name)
         except ImportError:
             self.fail('Unable to import module: ' + module_name)
-
     def run_find_anagrams(self, word_list, benchmark):
         """Helper func to time the find_anagrams() func"""
         f = functools.partial(self.ana.find_anagrams, word_list)
@@ -31,7 +30,6 @@ class TestAnagrams(unittest.TestCase):
             f'benchmark of {benchmark:.03f} seconds'
             )
         self.assertLessEqual(actual_time, benchmark, failure_text)
-
     def test_correct_result(self):
         """Check the anagram dict result for correctness"""
         with open("words/short.txt") as f:
@@ -41,7 +39,6 @@ class TestAnagrams(unittest.TestCase):
         with open('tests/short_list.json') as f:
             expected_dict = json.loads(f.read())
         self.assertDictEqual(actual_dict, expected_dict)
-
     def test_short(self):
         """Check find_anagrams() func timing with short word list."""
         with open("words/short.txt") as f:
@@ -54,7 +51,5 @@ class TestAnagrams(unittest.TestCase):
         with open("words/long.txt") as f:
             long_list = f.read().split()
         self.run_find_anagrams(long_list, 0.500)
-
-
 if __name__ == '__main__':
     unittest.main()
